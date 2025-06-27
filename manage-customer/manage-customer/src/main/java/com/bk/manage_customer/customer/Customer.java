@@ -6,10 +6,10 @@ public class Customer {
 
     private long id;
 
-    @Size(min = 2,max = 50 ,message = "Firstname must be between 2 and 50 characters")
+    @Size(min = 2,max = 50 ,message = ErrorMessages.INVALID_FIRSTNAME_LENGTH)
     private String firstname;
 
-    @Size(min = 2,max = 50 ,message = "Lastname must be between 2 and 50 characters")
+    @Size(min = 2,max = 50 ,message = ErrorMessages.INVALID_LASTNAME_LENGTH)
     private String lastname;
     private String gender;
     private Address address;

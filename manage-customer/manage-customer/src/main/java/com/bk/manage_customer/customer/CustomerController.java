@@ -26,7 +26,7 @@ public class CustomerController {
     public Customer getCustomerById(@PathVariable long id) {
         Customer customer = customerService.findById(id);
         if (customer == null)
-            throw new CustomerNotFoundException("Customer not found");
+            throw new CustomerNotFoundException(ErrorMessages.CUSTOMER_NOT_FOUND);
         return customer;
     }
 
@@ -34,7 +34,7 @@ public class CustomerController {
     public ResponseEntity<HttpStatus> deleteCustomerById(@PathVariable long id) {
         Customer customer = customerService.findById(id);
         if (customer == null)
-            throw new CustomerNotFoundException("Customer not found");
+            throw new CustomerNotFoundException(ErrorMessages.CUSTOMER_NOT_FOUND);
         customerService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

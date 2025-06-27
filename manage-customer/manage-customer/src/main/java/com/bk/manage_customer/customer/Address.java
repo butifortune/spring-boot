@@ -6,11 +6,11 @@ import jakarta.validation.constraints.Size;
 public class Address {
     private int streetNumber;
 
-   @Size(min = 2, message = "Street number should have at least 2 characters")
+   @Size(min = 2, message = ErrorMessages.INVALID_STREET_NAME)
     private String streetName;
     private String City;
     private String Province;
-    @Pattern(regexp = "^\\d{4}$", message = "Invalid postal code")
+    @Pattern(regexp = "^\\d{4}$", message = ErrorMessages.INVALID_POSTAL_CODE)
     private int code;
 
     public Address(int streetNumber, String streetName, String city, String province, int code) {
