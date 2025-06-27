@@ -10,7 +10,7 @@ public class Address {
     private String streetName;
     private String City;
     private String Province;
-    @Pattern(regexp = "^\\d{4}$")
+    @Pattern(regexp = "^\\d{4}$", message = "Invalid postal code")
     private int code;
 
     public Address(int streetNumber, String streetName, String city, String province, int code) {
