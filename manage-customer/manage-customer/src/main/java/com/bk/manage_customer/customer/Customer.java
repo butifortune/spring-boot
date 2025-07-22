@@ -1,10 +1,14 @@
 package com.bk.manage_customer.customer;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
+@Entity
 public class Customer {
 
-    private long id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @Size(min = 2,max = 50 ,message = ErrorMessages.INVALID_FIRSTNAME_LENGTH)
     private String firstname;
@@ -12,10 +16,25 @@ public class Customer {
     @Size(min = 2,max = 50 ,message = ErrorMessages.INVALID_LASTNAME_LENGTH)
     private String lastname;
     private String gender;
+    /*@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    */
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "address",
+            joinColumns =
+                    { @JoinColumn(name = "customer_id", referencedColumnName = "id") },
+            inverseJoinColumns =
+                    { @JoinColumn(name = "address_id", referencedColumnName = "id") })
     private Address address;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
     private ContactDetails contactDetails;
 
-    public Customer(long id, String firstname, String lastname, String gender, Address address, ContactDetails contactDetails) {
+    public Customer() {
+    }
+
+    public Customer(Long id, String firstname, String lastname, String gender, Address address, ContactDetails contactDetails) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -24,7 +43,7 @@ public class Customer {
         this.contactDetails = contactDetails;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -40,7 +59,7 @@ public class Customer {
         return gender;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
